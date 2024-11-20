@@ -1,0 +1,208 @@
+/* Reset some default styles */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('h.jpg') repeat; /* Repeating background texture */
+    background-color: #3498db; /* Fallback color for non-repeating background */
+    background-position: top right; /* Shift the background image to the top-right corner */
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.container {
+    max-width: 1500px; /* Adjust the maximum width based on your design */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+}
+
+.left-center-paragraph {
+    width: 40%; /* Take up the full width */
+    line-height: 1.5;
+}
+
+.project-details {
+    color: black; /* Change paragraph text color to black */
+    line-height: 1.5;
+}
+
+.upload-btn-wrapper {
+    margin-top: 20px; /* Increased margin for better spacing */
+}
+
+#predictButton {
+    width: 30%;
+    padding: 25px;
+    background-color: #2ecc70;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+
+#result {
+    max-width: 20%;
+    margin: 20px auto;
+    margin-left: 10px;
+    padding: 20px;
+    background-color:  #2ecc70;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.black-text {
+    color: black;
+}
+
+#loading {
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
+/* Tabs styling */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #3498db;
+}
+
+.tab-link {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tab-link.active { 
+}
+
+/* Contact form styling */
+.contact-form {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.contact-form label,
+.contact-form input,
+.contact-form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Apply Home page styles to About Us and Contact Us pages */
+#about-content {
+    max-width: 30%;
+    margin-left: 0%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#about-content h1,
+#contact-content h1 {
+    text-align: left;
+    padding-top: 0;
+    font-size: 3em;
+    font-weight: bold;
+    color: #070707;
+}
+
+#about-content p,
+#contact-content p {
+    color: rgb(14, 14, 14);
+    line-height: 1.5;
+}
+/* Contact Us Tab styling */
+#contact-content {
+    max-width: 50%;
+    margin-left: 0%;
+    padding: 0px;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact-content h1 {
+    text-align: left;
+    padding-top: 0;
+    font-size: 2em;
+    font-weight: bold;
+    color: #060505;
+}
+
+#contact-content p {
+    color: #0e0e0e;
+    line-height: 1.5;
+}
+
+/* Contact form styling for Contact Us tab */
+#contact-content .contact-form {
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+#contact-content .contact-form label,
+#contact-content .contact-form input,
+#contact-content .contact-form textarea {
+    display: block;
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+#contact-content .contact-form button {
+    width: 30%;
+    padding: 8px;
+    background-color: #3498db;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Social media and creator text styling */
+.social-media {
+    display: flex;
+    justify-content: left;
+    margin-top: 70px;
+    
+}
+
+.social-icon {
+    margin: 0 10px;
+    text-decoration: none;
+    margin-left: 0%;
+}
+
+.social-icon img {
+    width: 10px; /* Adjust the size of social media icons */
+}
+
+.creator-text {
+    text-align: left;
+    margin-top: 10px;
+    color: #000000; /* Adjust the color of the creator's text */
+    font-size: 1.2em; /* Adjust the font size of the creator's text */
+}

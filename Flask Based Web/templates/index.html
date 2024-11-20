@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="tabs">
+        <a href="#" class="tab-link active" onclick="openTab('home')">Home</a>
+        <a href="#" class="tab-link" onclick="openTab('about')">About</a>
+        <a href="#" class="tab-link" onclick="openTab('contact')">Contact Us</a>
+    </div>
+
+    <div class="container">
+        <!-- Content for Home Tab -->
+        <div id="home-content">
+            <h1 class="highlight-title">Gesture Recognition</h1>
+            <div class="left-center-paragraph">
+                <p class="project-details">Welcome to the Gesture Recognition project! This web application allows you to upload an image, and our trained model will predict gestures present in the image.</p>
+                <p class="project-details">Simply choose an image file, click the "Upload and Predict" button, and our system will provide you with the predicted gesture. It's a fun and interactive way to explore gesture recognition technology!</p>
+            </div>
+
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="upload-btn-wrapper">
+                    <input type="file" id="fileInput" accept="image/*" required>
+                    <button type="button" onclick="uploadAndPredict()" id="predictButton">Upload and Predict</button>
+                </div>
+            </form>
+
+            <div id="loading">Loading...</div>
+            <div id="result" class="black-text"></div>
+            <div class="cropped-image" id="inner"></div>
+            <div id="centered"></div>
+
+            <div class="social-media" style="margin-top: 2%;">
+                <a href="#" class="social-icon" target="_blank"><img src="static/fb.png" alt="Facebook"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/x.png" alt="Twitter"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/ins.png" alt="Instagram"></a>
+            </div>
+        
+            <p class="creator-text">Created by Majid Hanif</p>
+        </div>
+        <!-- Content for About Us Tab -->
+        <div id="about-content" style="display: none;">
+            <h1>About Us</h1>
+            <p>Welcome to Gesture Recognition, where innovation meets interaction. Our project is dedicated to exploring the exciting world of gesture recognition technology and its applications. We believe in creating intuitive and engaging experiences that redefine the way we interact with devices and technology.</p>
+
+            <p>Our team of passionate experts in machine learning, computer vision. We are driven by the vision of a future where gestures seamlessly translate into meaningful actions, opening up new possibilities for communication and control.</p>
+
+            <p>Join us on this journey of discovery and experience the future of interaction with Gesture Recognition!</p>
+            <div class="social-media" style="margin-top: 2%;">
+                <a href="#" class="social-icon" target="_blank"><img src="static/fb.png" alt="Facebook"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/x.png" alt="Twitter"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/ins.png" alt="Instagram"></a>
+            </div>
+            <p class="creator-text">Created by Majid Hanif</p>
+        </div>
+
+        <!-- Content for Contact Us Tab -->
+        <div id="contact-content" style="display: none;">
+            <h1>Contact Us</h1>
+
+            <p>If you have any questions, inquiries, or simply want to connect, feel free to reach out to us. We'd love to hear from you!</p>
+
+            <h2>Contact Information:</h2>
+            <p><strong>Email:</strong> majidhanifofficial@230.com</p>
+            <p><strong>Phone:</strong> +92 3013889545</p>
+
+            <h2>Visit Us:</h2>
+            <p>Department of artificial Intelligence</p>
+
+            <div class="contact-form">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="button" onclick="submitContactForm()">Submit</button>
+            </div>
+            <div class="social-media" style="margin-top: 0%;" >
+                <a href="#" class="social-icon" target="_blank"><img src="static/fb.png" alt="Facebook"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/x.png" alt="Twitter"></a>
+                <a href="#" class="social-icon" target="_blank"><img src="static/ins.png" alt="Instagram"></a>
+            </div>
+            <p class="creator-text">Created by Majid Hanif </p>
+        </div>
+        
+    </div>
+
+
+    <script>
+        function openTab(tabName) {
+            // Hide all content divs
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('about-content').style.display = 'none';
+            document.getElementById('contact-content').style.display = 'none';
+
+            // Deactivate all tabs
+            const tabLinks = document.getElementsByClassName('tab-link');
+            for (let i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove('active');
+            }
+
+            // Show the selected content and activate the corresponding tab
+            document.getElementById(tabName + '-content').style.display = 'block';
+            document.querySelector('[onclick="openTab(\'' + tabName + '\')"]').classList.add('active');
+        }
+
+        async function uploadAndPredict() {
+            const fileInput = document.getElementById('fileInput');
+            const predictButton = document.getElementById('predictButton');
+            const loading = document.getElementById('loading');
+
+            // Disable the button during the prediction request
+            predictButton.disabled = true;
+            loading.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log(result);
+                    // Display the result
+                    document.getElementById('result').innerHTML = `
+                        <p class="black-text"><strong>Prediction:</strong> ${result.prediction}</p>
+                    `;
+                } else {
+                    // Handle the error
+                    console.error('Failed to receive a valid response from the server.');
+                }
+            } catch (error) {
+                console.error('An error occurred during the prediction request:', error);
+            } finally {
+                // Enable the button and hide the loading indicator
+                predictButton.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+
+        function submitContactForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Add your logic to handle the form submission (e.g., sending an email)
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Message:', message);
+
+            // You can add further processing or send the form data to a server
+            // For a complete solution, you might want to use a server-side language like Node.js, PHP, etc.
+        }
+    </script>
+</body>
+</html>
